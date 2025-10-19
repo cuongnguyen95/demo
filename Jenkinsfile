@@ -1,15 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.9-eclipse-temurin-17'   // image có sẵn Maven + Java 17
-            args '-v /root/.m2:/root/.m2'           // cache Maven local repo (tùy chọn)
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/cuongnguyen95/demo.git'
+            }
+        }
+
+        stage('Setup Maven') {
+            steps {
+                sh '''
+                apt-get update -y
+                apt-get install -y maven
+                mvn -version
+                '''
             }
         }
 
