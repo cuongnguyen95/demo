@@ -1,0 +1,21 @@
+apiVersion: apps/v1 # là phiên bản hiện tại chuẩn để định nghĩa Deployment, DaemonSet, ReplicaSet.
+kind: Deployment #cho biết loại tài nguyên (resource type) bạn đang khai báo.
+metadata:
+  name: myapp2  # tên của Deployment (kubectl get deployments).
+spec: # phần mô tả chi tiết cách K8s vận hành Deployment này.
+      # Mọi cấu hình như số Pod, labels, container, port... đều nằm ở đây.
+  replicas: 1 # so luon pod muon chay
+  selector: # cho biết Deployment sẽ quản lý Pod nào.
+    matchLabels:
+      app: myapp2 # Label đe service tim dung pod
+  template: # mô tả Pod được tạo ra bởi Deployment.
+    metadata:
+      labels:
+        app: myapp2 # Mỗi Pod được tạo ra sẽ mang nhãn app=myapp2.
+    spec: # chi tiết cấu hình cho Pod
+      containers:
+        - name: myapp2 # Tên container (bên trong Pod), không cần trùng với tên image hay Deployment.
+          image: nguyencuong95/myapp2:1.0.0   # Thay bằng image của bạn
+          imagePullPolicy: Always           # vì lấy từ Docker Hub
+          ports:
+            - containerPort: 8081

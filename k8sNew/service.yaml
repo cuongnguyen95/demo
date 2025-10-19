@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp2 # 👈 Chính dòng này quyết định tên Service (  kubectl get svc)
+spec:
+  type: LoadBalancer  # Kiểu Service
+  # ClusterIP: chỉ dùng nội bộ trong cluster.
+  # NodePort: mở port ra ngoài node (có thể truy cập qua localhost:<nodePort>).
+  # LoadBalancer: dùng khi deploy trên cloud (AWS, GCP...) sẽ tạo IP public.
+  selector:
+    app: myapp2  # Phải khớp label trong Deployment
+  ports:
+    - port: 8081        # Cổng mà Service cung cấp trong cluster
+      targetPort: 8081  # Cổng trong container (containerPort)
+      nodePort: 31120   # đổi nodePort (mỗi Service phải khác nhau)

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: nguyencuong95/myapp:1.0.0   # Thay bằng image của bạn
+          imagePullPolicy: Always           # vì lấy từ Docker Hub
+          ports:
+            - containerPort: 8080
