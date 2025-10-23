@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+spec:
+  type: LoadBalancer    # đổi sang LoadBalancer nếu đang dùng cloud
+  selector:
+    app: pgadmin
+  ports:
+    - port: 84
+      targetPort: 80
+      nodePort: 30080   # truy cập tại http://localhost:30080
