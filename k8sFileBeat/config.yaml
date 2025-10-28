@@ -18,4 +18,4 @@ data:
                     logs_path: /var/log/containers/
 
     output.elasticsearch:
-      hosts: ["elasticsearch:9200"]
+      hosts: ["http://elasticsearch:9200"]

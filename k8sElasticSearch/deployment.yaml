@@ -23,8 +23,16 @@ spec:
             - name: discovery.type
               value: single-node
             - name: ES_JAVA_OPTS
-              value: "-Xms512m -Xmx512m"
+              value: "-Xms1g -Xmx1g"
+            # ⚙️ Thêm 2 dòng này để tắt bảo mật + SSL
+            - name: xpack.security.enabled
+              value: "false"
+            - name: xpack.security.http.ssl.enabled
+              value: "false"
           resources:
-            limits:
-              memory: "1Gi"
+            requests:
+              memory: "2Gi"
               cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"

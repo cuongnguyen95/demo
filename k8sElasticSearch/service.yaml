@@ -6,7 +6,7 @@ spec:
   selector:
     app: elasticsearch
   ports:
-    - name: http
+    - name : http
       port: 9200
       targetPort: 9200
   type: LoadBalancer
